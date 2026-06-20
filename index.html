@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>簡昱衡 | 個人主頁</title>
+    <title>簡昱衡 | 經驗的路徑擬合</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-color: #0d0d0d;
-            --card-bg: #1a1a1a;
+            --bg-color: #050505; /* 更深邃的背景 */
+            --card-bg: rgba(26, 26, 26, 0.6); /* 加入微透明玻璃感 */
             --text-main: #f3f4f6;
             --text-muted: #9ca3af;
-            --accent: #10b981; /* 科技綠 */
-            --border: #262626;
+            --accent: #a3e635; /* 螢光萊姆綠，更具科技與量化感 */
+            --border: rgba(255, 255, 255, 0.1);
+            --card-hover-bg: rgba(38, 38, 38, 0.9);
         }
 
         * {
@@ -23,115 +25,158 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-color);
+            /* 科技感放射漸層背景 */
+            background-image: radial-gradient(circle at 50% 0%, rgba(163, 230, 53, 0.05) 0%, transparent 60%);
             color: var(--text-main);
             line-height: 1.6;
             display: flex;
             justify-content: center;
             padding: 4rem 1.5rem;
+            min-height: 100vh;
         }
 
         .container {
-            max-width: 700px;
+            max-width: 900px; /* 放寬容器，容納更多欄位 */
             width: 100%;
         }
 
         /* 個人資訊區塊 */
         .profile-header {
             text-align: center;
-            margin-bottom: 3.5rem;
+            margin-bottom: 4rem;
         }
 
         .avatar {
-            width: 130px;
-            height: 130px;
+            width: 140px;
+            height: 140px;
             border-radius: 50%;
             border: 2px solid var(--border);
             object-fit: cover;
             margin-bottom: 1.5rem;
-            transition: border-color 0.3s ease, transform 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
         }
 
         .avatar:hover {
             border-color: var(--accent);
-            transform: scale(1.03);
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 15px 30px rgba(163, 230, 53, 0.2);
         }
 
         .name {
-            font-size: 2.2rem;
-            font-weight: 700;
+            font-size: 2.5rem;
+            font-weight: 800;
             letter-spacing: 0.05em;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
         }
 
         .bio {
             color: var(--text-muted);
             font-size: 1.1rem;
-            max-width: 450px;
+            max-width: 500px;
             margin: 0 auto;
         }
 
-        /* Bento Grid 佈局 */
+        /* 高擴容性的 Bento Grid 系統 */
         .bento-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.25rem;
+            /* 預設三欄排版，自動填滿 */
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            grid-auto-flow: dense; /* 讓大小卡片自動緊密貼合 */
         }
 
         .card {
             background-color: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 1.75rem;
+            border-radius: 24px;
+            padding: 2rem;
             text-decoration: none;
             color: inherit;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-height: 140px;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            min-height: 160px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
         .card:hover {
-            border-color: var(--accent);
+            background-color: var(--card-hover-bg);
+            border-color: rgba(163, 230, 53, 0.5);
             transform: translateY(-5px);
-            box-shadow: 0 12px 30px -10px rgba(16, 185, 129, 0.2);
+            box-shadow: 0 10px 30px -10px rgba(163, 230, 53, 0.15);
+        }
+
+        /* 模組化尺寸類別 (方便未來自由組裝) */
+        .span-2 { grid-column: span 2; }
+        .span-3 { grid-column: span 3; }
+        .row-span-2 { grid-row: span 2; }
+
+        /* 卡片內部排版 */
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            color: var(--accent);
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .card-icon {
+            transform: scale(1.1) rotate(-5deg);
         }
 
         .card h3 {
-            font-size: 1.25rem;
+            font-size: 1.3rem;
             font-weight: 600;
             color: var(--text-main);
-            margin-bottom: 0.5rem;
         }
 
         .card p {
             color: var(--text-muted);
             font-size: 0.95rem;
             flex-grow: 1;
+            line-height: 1.7;
         }
 
         .card .arrow {
             align-self: flex-end;
             font-size: 1.2rem;
             color: var(--text-muted);
-            transition: color 0.25s, transform 0.25s;
+            transition: color 0.3s, transform 0.3s;
             margin-top: 1rem;
+            background: rgba(255,255,255,0.05);
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
         }
 
         .card:hover .arrow {
-            color: var(--accent);
-            transform: translateX(3px);
+            color: var(--bg-color);
+            background-color: var(--accent);
+            transform: translateX(5px);
         }
 
-        /* 滿版強調卡片 */
-        .full-width {
-            grid-column: 1 / -1;
-        }
-
-        /* 手機板響應式優化 */
-        @media (max-width: 550px) {
-            .bento-grid {
-                grid-template-columns: 1fr;
+        /* 手機板響應式優化：強迫所有卡片變成單欄 */
+        @media (max-width: 800px) {
+            .span-2, .span-3 {
+                grid-column: span 1;
             }
             body {
                 padding: 2rem 1rem;
@@ -145,33 +190,54 @@
         <header class="profile-header">
             <img src="IMG20260508144654 (2).jpg" alt="簡昱衡" class="avatar">
             <h1 class="name">簡昱衡</h1>
-            <p class="bio">你好</p>
+            <p class="bio">持續進行經驗的路徑擬合。量化研究開發 / STEM 引導者 / 自由軟體開發。</p>
         </header>
 
         <main class="bento-grid">
             
-            <a href="https://www.facebook.com/profile.php?id=61580722337993" class="card full-width" target="_blank">
-                <div>
-                    <h3>📱 Facebook</h3>
-                    <p>社群連結與日常動態分享。</p>
+            <a href="#" class="card span-2" onclick="return false;">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fa-solid fa-chart-line"></i></div>
+                    <h3>量化交易與 Alpha 研究</h3>
                 </div>
-                <div class="arrow">→</div>
+                <p>基於 YOLO 模型與計算機視覺的型態辨識系統，結合頸線偵測與時間訊號容器架構。（作品集建置中）</p>
+                <div class="arrow"><i class="fa-solid fa-arrow-right"></i></div>
             </a>
 
-            <a href="mailto:a0916295361@gmail.com" class="card">
-                <div>
-                    <h3>✉️ 聯絡信箱</h3>
-                    <p>隨時透過 Email 與我聯繫合作。</p>
+            <a href="#" class="card span-2" onclick="return false;">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fa-solid fa-cube"></i></div>
+                    <h3>ARMOR 實驗教育模型</h3>
                 </div>
-                <div class="arrow">→</div>
+                <p>透過真實任務與即時回饋，拒絕空泛積累，建構學生的主體性與決策思維。（專案建置中）</p>
+                <div class="arrow"><i class="fa-solid fa-arrow-right"></i></div>
             </a>
 
-            <a href="#" class="card" onclick="return false;" style="cursor: default; opacity: 0.6;">
-                <div>
-                    <h3>🚀 個人專案</h3>
-                    <p>作品展示與實證紀錄（建置中）。</p>
+            <a href="https://www.facebook.com/profile.php?id=61580722337993" class="card" target="_blank">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fa-brands fa-facebook-f"></i></div>
+                    <h3>Facebook</h3>
                 </div>
-                <div class="arrow" style="display: none;">→</div>
+                <p>社群連結與日常動態分享。</p>
+                <div class="arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            </a>
+
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=a0916295361@gmail.com" class="card" target="_blank">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fa-solid fa-envelope"></i></div>
+                    <h3>聯絡信箱</h3>
+                </div>
+                <p>點擊直接開啟 Gmail 撰寫郵件，隨時討論技術與合作。</p>
+                <div class="arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            </a>
+
+            <a href="http://m.me/你的Facebook使用者名稱" class="card" target="_blank">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fa-brands fa-facebook-messenger"></i></div>
+                    <h3>即時訊息</h3>
+                </div>
+                <p>透過 Messenger 直接傳送訊息，獲得最即時的回覆。</p>
+                <div class="arrow"><i class="fa-solid fa-arrow-right"></i></div>
             </a>
 
         </main>
