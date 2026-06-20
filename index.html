@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>簡昱衡 | 個人主頁</title>
+    <style>
+        :root {
+            --bg-color: #0d0d0d;
+            --card-bg: #1a1a1a;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --accent: #10b981; /* 科技綠 */
+            --border: #262626;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            padding: 4rem 1.5rem;
+        }
+
+        .container {
+            max-width: 700px;
+            width: 100%;
+        }
+
+        /* 個人資訊區塊 */
+        .profile-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .avatar {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            border: 2px solid var(--border);
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .avatar:hover {
+            border-color: var(--accent);
+            transform: scale(1.03);
+        }
+
+        .name {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .bio {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 450px;
+            margin: 0 auto;
+        }
+
+        /* Bento Grid 佈局 */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 1.75rem;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 140px;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px -10px rgba(16, 185, 129, 0.2);
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+
+        .card .arrow {
+            align-self: flex-end;
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            transition: color 0.25s, transform 0.25s;
+            margin-top: 1rem;
+        }
+
+        .card:hover .arrow {
+            color: var(--accent);
+            transform: translateX(3px);
+        }
+
+        /* 滿版強調卡片 */
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        /* 手機板響應式優化 */
+        @media (max-width: 550px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+            body {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header class="profile-header">
+            <img src="IMG20260508144654 (2).jpg" alt="簡昱衡" class="avatar">
+            <h1 class="name">簡昱衡</h1>
+            <p class="bio">你好</p>
+        </header>
+
+        <main class="bento-grid">
+            
+            <a href="https://www.facebook.com/profile.php?id=61580722337993" class="card full-width" target="_blank">
+                <div>
+                    <h3>📱 Facebook</h3>
+                    <p>社群連結與日常動態分享。</p>
+                </div>
+                <div class="arrow">→</div>
+            </a>
+
+            <a href="mailto:a0916295361@gmail.com" class="card">
+                <div>
+                    <h3>✉️ 聯絡信箱</h3>
+                    <p>隨時透過 Email 與我聯繫合作。</p>
+                </div>
+                <div class="arrow">→</div>
+            </a>
+
+            <a href="#" class="card" onclick="return false;" style="cursor: default; opacity: 0.6;">
+                <div>
+                    <h3>🚀 個人專案</h3>
+                    <p>作品展示與實證紀錄（建置中）。</p>
+                </div>
+                <div class="arrow" style="display: none;">→</div>
+            </a>
+
+        </main>
+    </div>
+
+</body>
+</html>
